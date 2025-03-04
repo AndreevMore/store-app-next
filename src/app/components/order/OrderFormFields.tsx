@@ -5,7 +5,7 @@ export function OrderFormFields() {
     <>
       <div className="mb-4">
         <label className="block">Status</label>
-        <Field as="select" name="status" className="border p-2 w-full">
+        <Field as="select" name="status" className="w-full border p-2">
           <option value="paid">Paid</option>
           <option value="pending">Pending</option>
           <option value="shipped">Shipped</option>
@@ -19,24 +19,52 @@ export function OrderFormFields() {
             <label className="block font-bold">Products</label>
             <FieldArray name="products">
               {({ form }) =>
-                form.values.products.map((_: { productId: string; quantity: number }, index: number) => (
-                  <div key={index} className="mb-4 border-b pb-2">
-                    <label className="block">Product ID</label>
-                    <Field name={`products.${index}.productId`} className="border p-2 w-full" />
-                    <FormikError name={`products.${index}.productId`} component="div" className="text-red-500" />
+                form.values.products.map(
+                  (
+                    _: { productId: string; quantity: number },
+                    index: number,
+                  ) => (
+                    <div key={index} className="mb-4 border-b pb-2">
+                      <label className="block">Product ID</label>
+                      <Field
+                        name={`products.${index}.productId`}
+                        className="w-full border p-2"
+                      />
+                      <FormikError
+                        name={`products.${index}.productId`}
+                        component="div"
+                        className="text-red-500"
+                      />
 
-                    <label className="block">Quantity</label>
-                    <Field name={`products.${index}.quantity`} type="number" className="border p-2 w-full" />
-                    <FormikError name={`products.${index}.quantity`} component="div" className="text-red-500" />
+                      <label className="block">Quantity</label>
+                      <Field
+                        name={`products.${index}.quantity`}
+                        type="number"
+                        className="w-full border p-2"
+                      />
+                      <FormikError
+                        name={`products.${index}.quantity`}
+                        component="div"
+                        className="text-red-500"
+                      />
 
-                    <button type="button" onClick={() => remove(index)} className="text-red-500 cursor-pointer mt-2">
-                      Remove
-                    </button>
-                  </div>
-                ))
+                      <button
+                        type="button"
+                        onClick={() => remove(index)}
+                        className="mt-2 cursor-pointer text-red-500"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ),
+                )
               }
             </FieldArray>
-            <button type="button" onClick={() => push({ productId: "", quantity: "" })} className="text-blue-500 cursor-pointer">
+            <button
+              type="button"
+              onClick={() => push({ productId: "", quantity: "" })}
+              className="cursor-pointer text-blue-500"
+            >
               Add Product
             </button>
           </div>

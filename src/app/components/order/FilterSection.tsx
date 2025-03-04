@@ -12,12 +12,12 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
   setSearch,
 }) => {
   return (
-    <div className="flex justify-between items-center gap-1">
+    <div className="flex items-center justify-between gap-1">
       <div>
         <label className="mr-2">Filter:</label>
         <select
           onChange={(e) => setFilter(e.target.value as FilterOption)}
-          className="border p-2 rounded"
+          className="rounded border p-2"
         >
           <option value="all">All</option>
           <option value="pending">Pending</option>
@@ -29,7 +29,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
         <input
           type="text"
           placeholder="Search orders..."
-          className="border p-2 rounded"
+          className="rounded border p-2"
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>

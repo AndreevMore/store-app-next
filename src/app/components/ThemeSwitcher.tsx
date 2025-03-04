@@ -8,7 +8,7 @@ export default function ThemeSwitcher() {
 
   return (
     <button
-      className="p-2 cursor-pointer rounded-lg bg-gray-200 dark:bg-gray-800"
+      className="cursor-pointer rounded-lg bg-gray-200 p-2 dark:bg-gray-800"
       onClick={toggleTheme}
     >
       {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}

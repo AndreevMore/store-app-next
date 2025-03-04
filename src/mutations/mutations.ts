@@ -13,7 +13,7 @@ export const useDeleteOrderMutation = () => {
     mutationFn: (id: string) => deleteCart(id),
     onSuccess: (_, id) => {
       queryClient.setQueryData<Order[]>(["orders"], (oldOrders) =>
-        oldOrders ? oldOrders.filter((order) => order.id !== Number(id)) : []
+        oldOrders ? oldOrders.filter((order) => order.id !== Number(id)) : [],
       );
       router.back();
     },
@@ -25,7 +25,7 @@ export const useDeleteOrderMutation = () => {
 };
 
 export const useAddOrderMutation = (
-  setIsModalOpen: (isOpen: boolean) => void
+  setIsModalOpen: (isOpen: boolean) => void,
 ) => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -61,8 +61,8 @@ export const useEditOrderMutation = () => {
 
       queryClient.setQueryData<Order[]>(["orders"], (oldOrders = []) =>
         oldOrders.map((order) =>
-          order.id === updatedOrder.id ? updatedOrderWithStatus : order
-        )
+          order.id === updatedOrder.id ? updatedOrderWithStatus : order,
+        ),
       );
     },
   });

@@ -21,13 +21,13 @@ export function OrderModal({ isModalOpen }: OrderModalProps) {
   return (
     <div
       onClick={() => setIsModalOpen(false)}
-      className="fixed inset-0 flex items-center justify-center bg-gray-900/50 p-4 overflow-y-auto"
+      className="fixed inset-0 flex items-center justify-center overflow-y-auto bg-gray-900/50 p-4"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white p-6 rounded shadow-lg w-96 max-h-[70vh] overflow-y-auto"
+        className="max-h-[70vh] w-96 overflow-y-auto rounded bg-white p-6 shadow-lg"
       >
-        <h2 className="text-xl font-bold mb-4">
+        <h2 className="mb-4 text-xl font-bold">
           {isEditMode ? "Edit Order" : "Add New Order"}
         </h2>
         <Formik
@@ -64,17 +64,17 @@ export function OrderModal({ isModalOpen }: OrderModalProps) {
         >
           <Form>
             <OrderFormFields />
-            <div className="flex justify-end gap-2 mt-4">
+            <div className="mt-4 flex justify-end gap-2">
               <button
                 type="button"
-                className="p-2 border cursor-pointer rounded"
+                className="cursor-pointer rounded border p-2"
                 onClick={() => setIsModalOpen(false)}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="p-2 border cursor-pointer rounded bg-blue-500 text-white"
+                className="cursor-pointer rounded border bg-blue-500 p-2 text-white"
               >
                 {isEditMode ? "Save Changes" : "Add Order"}
               </button>

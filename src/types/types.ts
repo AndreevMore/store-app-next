@@ -4,11 +4,13 @@ export type Order = {
   status: string;
   date?: string;
 };
+
 export type NewOrder = {
   products: Product[];
   status?: string;
   date?: string;
 };
+
 export type UpdateOrderStatusProps = {
   id: string;
   status: string;

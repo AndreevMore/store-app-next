@@ -13,7 +13,7 @@ export function OrderTable({
       : orders.filter((order) => order.status === filter);
 
   const searchedOrders = filteredOrders.filter((order) =>
-    `Order ${order.id}`.toLowerCase().includes(debouncedSearch.toLowerCase())
+    `Order ${order.id}`.toLowerCase().includes(debouncedSearch.toLowerCase()),
   );
 
   return (

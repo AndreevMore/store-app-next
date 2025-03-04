@@ -6,12 +6,12 @@ import Loader from "../components/Loader";
 import { PlusCircle } from "lucide-react";
 import { FilterSection } from "../components/order/FilterSection";
 import { FilterOption } from "../components/order/types";
-import { OrderModal } from "../components/order/OrderModal";
 import { OrderTable } from "../components/order/OrderTable";
 import { useModalContext } from "@/providers/ModalContext";
 import { useDeleteOrderMutation } from "@/mutations/mutations";
 import { useQuery } from "@tanstack/react-query";
 import { fetchOrders } from "@/services/api.service";
+import { OrderModal } from "../components/order/OrderModal";
 
 export default function Orders() {
   const [filter, setFilter] = useState<FilterOption>("all");
@@ -61,8 +61,8 @@ export default function Orders() {
         <meta property="og:type" content="website" />
       </Head>
 
-      <h1 className="text-2xl font-bold text-center  ">Orders</h1>
-      <div className="flex justify-between items-center  mb-4 mt-4">
+      <h1 className="text-center text-2xl font-bold">Orders</h1>
+      <div className="mt-4 mb-4 flex items-center justify-between">
         <FilterSection
           filter={filter}
           setFilter={setFilter}
@@ -70,7 +70,7 @@ export default function Orders() {
           setSearch={setSearch}
         />
         <button
-          className="flex cursor-pointer items-center gap-2 p-2 border rounded bg-blue-500 text-white"
+          className="flex cursor-pointer items-center gap-2 rounded border bg-blue-500 p-2 text-white"
           onClick={() => {
             setIsModalOpen(true);
             setOrderToEdit(null);

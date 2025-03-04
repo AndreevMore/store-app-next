@@ -7,9 +7,9 @@ import ErrorMessage from "@/app/components/ErrorMessage";
 import Skeleton from "@/app/components/Skeleton";
 import { Pencil, Trash2 } from "lucide-react";
 import { useModalContext } from "@/providers/ModalContext";
-import { OrderModal } from "@/app/components/order/OrderModal";
 import Head from "next/head";
 import { useDeleteOrderMutation } from "@/mutations/mutations";
+import { OrderModal } from "@/app/components/order/OrderModal";
 
 export default function OrderDetail() {
   const { id } = useParams<{ id: string }>();
@@ -83,15 +83,15 @@ export default function OrderDetail() {
         <link rel="canonical" href={`https://yourdomain.com/orders/${id}`} />
       </Head>
 
-      <div className="p-6 flex justify-center">
-        <div className="bg-[var(--foreground)] text-[var(--background)] shadow-lg rounded-lg p-6 w-full max-w-lg border border-gray-700 dark:border-gray-300">
-          <h1 className="text-2xl font-bold mb-4">Order Details: {id}</h1>
+      <div className="flex justify-center p-6">
+        <div className="w-full max-w-lg rounded-lg border border-gray-700 bg-[var(--foreground)] p-6 text-[var(--background)] shadow-lg dark:border-gray-300">
+          <h1 className="mb-4 text-2xl font-bold">Order Details: {id}</h1>
           <ul className="mb-4">
             {orderData &&
               orderData.products.map((product) => (
                 <li
                   key={product.productId}
-                  className="border-b border-gray-600 dark:border-gray-200 py-2"
+                  className="border-b border-gray-600 py-2 dark:border-gray-200"
                 >
                   <span className="font-medium">ID:</span> {product.productId}{" "}
                   <br />
@@ -102,7 +102,7 @@ export default function OrderDetail() {
           </ul>
           <div className="flex justify-between">
             <button
-              className="flex cursor-pointer items-center gap-2 p-2 border rounded text-blue-500"
+              className="flex cursor-pointer items-center gap-2 rounded border p-2 text-blue-500"
               onClick={() => {
                 setIsModalOpen(true);
                 setOrderToEdit(orderData ?? null);
@@ -111,7 +111,7 @@ export default function OrderDetail() {
               <Pencil size={20} /> Edit
             </button>
             <button
-              className="flex items-center cursor-pointer gap-2 p-2 border rounded text-white bg-red-500 hover:bg-red-600 dark:bg-red-400 dark:hover:bg-red-500 transition disabled:opacity-50"
+              className="flex cursor-pointer items-center gap-2 rounded border bg-red-500 p-2 text-white transition hover:bg-red-600 disabled:opacity-50 dark:bg-red-400 dark:hover:bg-red-500"
               onClick={() => deleteMutation.mutate(id.toString())}
               disabled={deleteMutation.isPending}
             >
@@ -121,9 +121,9 @@ export default function OrderDetail() {
           </div>
         </div>
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="mt-4 flex justify-center">
         <button
-          className="bg-gray-300 text-gray-900 px-4 cursor-pointer py-2 rounded hover:bg-gray-400 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600 transition"
+          className="cursor-pointer rounded bg-gray-300 px-4 py-2 text-gray-900 transition hover:bg-gray-400 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600"
           onClick={() => router.back()}
         >
           Back to Previous Page

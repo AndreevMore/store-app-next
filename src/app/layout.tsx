@@ -26,7 +26,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
       <head>
@@ -38,8 +37,8 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <ModalProvider>
-            <nav className="p-4 flex justify-between bg-gray-500  ">
-              <h1 className="text-2xl font-bold text-center">Orders Manager</h1>
+            <nav className="flex justify-between bg-gray-500 p-4">
+              <h1 className="text-center text-2xl font-bold">Orders Manager</h1>
               <ThemeSwitcher />
             </nav>
             <QueryProvider>{children}</QueryProvider>
