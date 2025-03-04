@@ -21,13 +21,13 @@ export function OrderModal({ isModalOpen }: OrderModalProps) {
   return (
     <div
       onClick={() => setIsModalOpen(false)}
-      className="fixed inset-0 flex items-center justify-center overflow-y-auto bg-gray-900/50 p-4"
+      className="fixed inset-0 flex items-center justify-center overflow-y-auto bg-gray-900/90 p-4"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="max-h-[70vh] w-96 overflow-y-auto rounded bg-white p-6 shadow-lg"
+        className="max-h-[70vh] w-96 overflow-y-auto rounded bg-white p-6 shadow-lg dark:bg-gray-800 dark:text-white"
       >
-        <h2 className="mb-4 text-xl font-bold">
+        <h2 className="mb-4 text-xl font-bold dark:text-gray-200">
           {isEditMode ? "Edit Order" : "Add New Order"}
         </h2>
         <Formik
@@ -55,7 +55,7 @@ export function OrderModal({ isModalOpen }: OrderModalProps) {
                 cartData: newOrder,
               });
             } else {
-              addOrderMutation.mutate(newOrder); //666
+              addOrderMutation.mutate(newOrder);
             }
 
             resetForm();
@@ -67,14 +67,14 @@ export function OrderModal({ isModalOpen }: OrderModalProps) {
             <div className="mt-4 flex justify-end gap-2">
               <button
                 type="button"
-                className="cursor-pointer rounded border p-2"
+                className="cursor-pointer rounded border p-2 dark:border-gray-600 dark:text-gray-300"
                 onClick={() => setIsModalOpen(false)}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="cursor-pointer rounded border bg-blue-500 p-2 text-white"
+                className="cursor-pointer rounded border bg-blue-500 p-2 text-white dark:bg-blue-600"
               >
                 {isEditMode ? "Save Changes" : "Add Order"}
               </button>

@@ -20,3 +20,16 @@ export type Product = {
   productId: number;
   quantity: number;
 };
+
+export interface ProductCard {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}

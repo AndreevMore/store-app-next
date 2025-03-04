@@ -10,10 +10,14 @@ import { useModalContext } from "@/providers/ModalContext";
 import Head from "next/head";
 import { useDeleteOrderMutation } from "@/mutations/mutations";
 import { OrderModal } from "@/app/components/order/OrderModal";
+import { useProducts } from "@/providers/ProductsProvider";
+import ProductCard from "@/app/components/ProductCard";
 
 export default function OrderDetail() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
+  const { products } = useProducts();
+
   const { isModalOpen, setIsModalOpen, setOrderToEdit, orderToEdit } =
     useModalContext();
 
@@ -22,6 +26,7 @@ export default function OrderDetail() {
     queryFn: fetchOrders,
     staleTime: 60000,
   });
+
   const deleteMutation = useDeleteOrderMutation();
   const cachedOrder = orders.find((order) => order.id === Number(id));
 
@@ -32,6 +37,7 @@ export default function OrderDetail() {
         status: cachedOrder.status,
       }
     : null;
+
   const {
     data: order,
     error,
@@ -64,7 +70,6 @@ export default function OrderDetail() {
           content={`order ${id}, ecommerce order, order tracking, order details`}
         />
         <meta name="robots" content="index, follow" />
-
         <meta property="og:title" content={`Order #${id} - Order Details`} />
         <meta
           property="og:description"
@@ -79,26 +84,40 @@ export default function OrderDetail() {
           property="og:image"
           content="https://yourdomain.com/static/order-preview.jpg"
         />
-
         <link rel="canonical" href={`https://yourdomain.com/orders/${id}`} />
       </Head>
-
+      <div className="mt-4 flex justify-center">
+        <button
+          className="cursor-pointer rounded bg-gray-300 px-4 py-2 text-gray-900 transition hover:bg-gray-400 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600"
+          onClick={() => router.back()}
+        >
+          Back to Previous Page
+        </button>
+      </div>
       <div className="flex justify-center p-6">
         <div className="w-full max-w-lg rounded-lg border border-gray-700 bg-[var(--foreground)] p-6 text-[var(--background)] shadow-lg dark:border-gray-300">
           <h1 className="mb-4 text-2xl font-bold">Order Details: {id}</h1>
           <ul className="mb-4">
             {orderData &&
-              orderData.products.map((product) => (
-                <li
-                  key={product.productId}
-                  className="border-b border-gray-600 py-2 dark:border-gray-200"
-                >
-                  <span className="font-medium">ID:</span> {product.productId}{" "}
-                  <br />
-                  <span className="font-medium">Quantity:</span>{" "}
-                  {product.quantity}
-                </li>
-              ))}
+              orderData.products.map((product) => {
+                const productDetails = products[product.productId]; // получаем продукт по productId из контекста
+
+                return (
+                  <li
+                    key={product.productId}
+                    className="border-b border-gray-600 py-2 dark:border-gray-200"
+                  >
+                    <div>
+                      {/* Отображаем ProductCard, если продукт найден */}
+                      <ProductCard
+                        product={productDetails}
+                        productId={product.productId.toString()}
+                        quantity={product.quantity}
+                      />
+                    </div>
+                  </li>
+                );
+              })}
           </ul>
           <div className="flex justify-between">
             <button
@@ -121,14 +140,7 @@ export default function OrderDetail() {
           </div>
         </div>
       </div>
-      <div className="mt-4 flex justify-center">
-        <button
-          className="cursor-pointer rounded bg-gray-300 px-4 py-2 text-gray-900 transition hover:bg-gray-400 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600"
-          onClick={() => router.back()}
-        >
-          Back to Previous Page
-        </button>
-      </div>
+
       <OrderModal isModalOpen={isModalOpen} orderToEdit={orderToEdit} />
     </>
   );

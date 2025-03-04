@@ -4,7 +4,9 @@ import "./globals.css";
 import QueryProvider from "@/providers/QueryProvider";
 import { ModalProvider } from "@/providers/ModalContext";
 import { ThemeProvider } from "@/providers/ThemeContext";
+import Link from "next/link";
 import ThemeSwitcher from "./components/ThemeSwitcher";
+import { ProductsProvider } from "@/providers/ProductsProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,10 +40,16 @@ export default function RootLayout({
         <ThemeProvider>
           <ModalProvider>
             <nav className="flex justify-between bg-gray-500 p-4">
-              <h1 className="text-center text-2xl font-bold">Orders Manager</h1>
+              <h1 className="cursor-pointer text-center text-2xl font-bold">
+                <Link href="/">Orders Manager</Link>
+              </h1>
+
               <ThemeSwitcher />
             </nav>
-            <QueryProvider>{children}</QueryProvider>
+
+            <QueryProvider>
+              <ProductsProvider>{children}</ProductsProvider>
+            </QueryProvider>
           </ModalProvider>
         </ThemeProvider>
       </body>

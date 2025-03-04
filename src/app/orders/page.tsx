@@ -10,7 +10,10 @@ import { OrderTable } from "../components/order/OrderTable";
 import { useModalContext } from "@/providers/ModalContext";
 import { useDeleteOrderMutation } from "@/mutations/mutations";
 import { useQuery } from "@tanstack/react-query";
-import { fetchOrders } from "@/services/api.service";
+import {
+  fetchOrders,
+  //  fetchProducts
+} from "@/services/api.service";
 import { OrderModal } from "../components/order/OrderModal";
 
 export default function Orders() {
@@ -30,6 +33,16 @@ export default function Orders() {
     queryFn: fetchOrders,
     staleTime: 60000,
   });
+
+  // const {
+  //   // data: products = [],
+  //   // error: productsError,
+  //   // isLoading: productsLoading,
+  // } = useQuery({
+  //   queryKey: ["products"],
+  //   queryFn: fetchProducts,
+  //   staleTime: 60000,
+  // });
 
   useEffect(() => {
     const handler = setTimeout(() => setDebouncedSearch(search), 1000);
