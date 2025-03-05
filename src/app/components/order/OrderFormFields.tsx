@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Field, FieldArray, ErrorMessage as FormikError } from "formik";
 import { PlusCircle, Trash2 } from "lucide-react";
+import { filterOptions, SelectOptions } from "../SelectOptions";
 
 export function OrderFormFields() {
   return (
@@ -8,9 +9,7 @@ export function OrderFormFields() {
       <div className="mb-4">
         <label className="block">Status</label>
         <Field as="select" name="status" className="w-full border p-2">
-          <option value="paid">Paid</option>
-          <option value="pending">Pending</option>
-          <option value="shipped">Shipped</option>
+          <SelectOptions options={filterOptions} />
         </Field>
         <FormikError name="status" component="div" className="text-red-500" />
       </div>
