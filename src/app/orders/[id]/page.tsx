@@ -3,15 +3,15 @@
 import { useParams, useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { fetchOrderDetails, fetchOrders } from "@/services/api.service";
-import ErrorMessage from "@/app/components/ErrorMessage";
-import ProductCardSkeleton from "@/app/components/Skeleton";
+import ErrorMessage from "@/components/ErrorMessage";
+import ProductCardSkeleton from "@/components/ui/Skeleton";
 import { Pencil, ChevronLeft, Trash2 } from "lucide-react";
 import { useModalContext } from "@/providers/ModalContext";
 import Head from "next/head";
 import { useDeleteOrderMutation } from "@/mutations/mutations";
-import { OrderModal } from "@/app/components/order/OrderModal";
+import { OrderModal } from "@/components/order/OrderModal";
 import { useProducts } from "@/providers/ProductsProvider";
-import ProductCard from "@/app/components/ProductCard";
+import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 
 export default function OrderDetail() {

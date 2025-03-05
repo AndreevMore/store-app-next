@@ -1,17 +1,17 @@
 "use client";
 import Head from "next/head";
 import { useState, useEffect } from "react";
-import ErrorMessage from "../components/ErrorMessage";
-import Loader from "../components/Loader";
+import ErrorMessage from "@/components/ErrorMessage";
+import Loader from "@/components/ui/Loader";
 import { PlusCircle } from "lucide-react";
-import { FilterSection } from "../components/order/FilterSection";
-import { FilterOption } from "../components/order/types";
-import { OrderTable } from "../components/order/OrderTable";
+import { FilterSection } from "@/components/order/FilterSection";
+import { FilterOption } from "@/components/order/types";
+import { OrderTable } from "@/components/order/OrderTable";
 import { useModalContext } from "@/providers/ModalContext";
 import { useDeleteOrderMutation } from "@/mutations/mutations";
 import { useQuery } from "@tanstack/react-query";
 import { fetchOrders } from "@/services/api.service";
-import { OrderModal } from "../components/order/OrderModal";
+import { OrderModal } from "@/components/order/OrderModal";
 import { Button } from "@/components/ui/button";
 
 export default function Orders() {

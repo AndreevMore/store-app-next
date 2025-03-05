@@ -5,7 +5,7 @@ import QueryProvider from "@/providers/QueryProvider";
 import { ModalProvider } from "@/providers/ModalContext";
 import { ThemeProvider } from "@/providers/ThemeContext";
 import Link from "next/link";
-import ThemeSwitcher from "./components/ThemeSwitcher";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { ProductsProvider } from "@/providers/ProductsProvider";
 
 const geistSans = Geist({
