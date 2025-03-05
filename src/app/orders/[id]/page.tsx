@@ -4,7 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { fetchOrderDetails, fetchOrders } from "@/services/api.service";
 import ErrorMessage from "@/app/components/ErrorMessage";
-import Skeleton from "@/app/components/Skeleton";
+import ProductCardSkeleton from "@/app/components/Skeleton";
 import { Pencil, ChevronLeft, Trash2 } from "lucide-react";
 import { useModalContext } from "@/providers/ModalContext";
 import Head from "next/head";
@@ -52,9 +52,9 @@ export default function OrderDetail() {
 
   const orderData = cachedOrderData || order;
 
-  if (isLoading && !orderData) {
-    return <Skeleton />;
-  }
+  // if (isLoading && !orderData) {
+  //   return <ProductCardSkeleton />;
+  // }
 
   if (error) return <ErrorMessage message={error.message} />;
 
@@ -116,33 +116,37 @@ export default function OrderDetail() {
         </div>
       </div>
 
-      <div className="m-4 flex justify-center">
-        <div className="w-full rounded-lg border border-gray-700 p-6 shadow-lg dark:border-gray-300">
-          <div className="flex items-center justify-between">
-            <ul>
-              {orderData &&
-                orderData.products.map((product) => {
-                  const productDetails = products[product.productId];
+      {isLoading && !orderData ? (
+        <ProductCardSkeleton />
+      ) : (
+        <div className="m-4 flex justify-center">
+          <div className="w-full rounded-lg border border-gray-700 p-6 shadow-lg dark:border-gray-300">
+            <div className="flex items-center justify-between">
+              <ul>
+                {orderData &&
+                  orderData.products.map((product) => {
+                    const productDetails = products[product.productId];
 
-                  return (
-                    <li
-                      key={product.productId}
-                      className="border-b border-gray-600 py-2 dark:border-gray-200"
-                    >
-                      <div>
-                        <ProductCard
-                          product={productDetails}
-                          productId={product.productId.toString()}
-                          quantity={product.quantity}
-                        />
-                      </div>
-                    </li>
-                  );
-                })}
-            </ul>
+                    return (
+                      <li
+                        key={product.productId}
+                        className="border-b border-gray-600 py-2 dark:border-gray-200"
+                      >
+                        <div>
+                          <ProductCard
+                            product={productDetails}
+                            productId={product.productId.toString()}
+                            quantity={product.quantity}
+                          />
+                        </div>
+                      </li>
+                    );
+                  })}
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       <OrderModal isModalOpen={isModalOpen} orderToEdit={orderToEdit} />
     </>
