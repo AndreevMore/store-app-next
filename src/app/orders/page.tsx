@@ -10,11 +10,9 @@ import { OrderTable } from "../components/order/OrderTable";
 import { useModalContext } from "@/providers/ModalContext";
 import { useDeleteOrderMutation } from "@/mutations/mutations";
 import { useQuery } from "@tanstack/react-query";
-import {
-  fetchOrders,
-  //  fetchProducts
-} from "@/services/api.service";
+import { fetchOrders } from "@/services/api.service";
 import { OrderModal } from "../components/order/OrderModal";
+import { Button } from "@/components/ui/button";
 
 export default function Orders() {
   const [filter, setFilter] = useState<FilterOption>("all");
@@ -33,16 +31,6 @@ export default function Orders() {
     queryFn: fetchOrders,
     staleTime: 60000,
   });
-
-  // const {
-  //   // data: products = [],
-  //   // error: productsError,
-  //   // isLoading: productsLoading,
-  // } = useQuery({
-  //   queryKey: ["products"],
-  //   queryFn: fetchProducts,
-  //   staleTime: 60000,
-  // });
 
   useEffect(() => {
     const handler = setTimeout(() => setDebouncedSearch(search), 1000);
@@ -75,6 +63,7 @@ export default function Orders() {
       </Head>
 
       <h1 className="text-center text-2xl font-bold">Orders</h1>
+
       <div className="mt-4 mb-4 flex items-center justify-between">
         <FilterSection
           filter={filter}
@@ -82,15 +71,14 @@ export default function Orders() {
           search={search}
           setSearch={setSearch}
         />
-        <button
-          className="flex cursor-pointer items-center gap-2 rounded border bg-blue-500 p-2 text-white"
+        <Button
           onClick={() => {
             setIsModalOpen(true);
             setOrderToEdit(null);
           }}
         >
           <PlusCircle size={20} /> Add Order
-        </button>
+        </Button>
       </div>
 
       <OrderTable

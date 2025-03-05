@@ -9,6 +9,7 @@ import {
 } from "@/mutations/mutations";
 import { orderValidationSchema } from "./validationSchema";
 import { OrderFormFields } from "./OrderFormFields";
+import { Button } from "@/components/ui/button";
 
 export function OrderModal({ isModalOpen }: OrderModalProps) {
   const { setIsModalOpen, orderToEdit } = useModalContext();
@@ -25,9 +26,9 @@ export function OrderModal({ isModalOpen }: OrderModalProps) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="max-h-[70vh] w-96 overflow-y-auto rounded bg-white p-6 shadow-lg dark:bg-gray-800 dark:text-white"
+        className="max-h-[70vh] w-96 overflow-y-auto rounded bg-[var(--background)] p-6 text-[var(--foreground)] shadow-lg"
       >
-        <h2 className="mb-4 text-xl font-bold dark:text-gray-200">
+        <h2 className="mb-4 text-xl font-bold">
           {isEditMode ? "Edit Order" : "Add New Order"}
         </h2>
         <Formik
@@ -65,19 +66,12 @@ export function OrderModal({ isModalOpen }: OrderModalProps) {
           <Form>
             <OrderFormFields />
             <div className="mt-4 flex justify-end gap-2">
-              <button
-                type="button"
-                className="cursor-pointer rounded border p-2 dark:border-gray-600 dark:text-gray-300"
-                onClick={() => setIsModalOpen(false)}
-              >
+              <Button type="button" onClick={() => setIsModalOpen(false)}>
                 Cancel
-              </button>
-              <button
-                type="submit"
-                className="cursor-pointer rounded border bg-blue-500 p-2 text-white dark:bg-blue-600"
-              >
+              </Button>
+              <Button type="submit">
                 {isEditMode ? "Save Changes" : "Add Order"}
-              </button>
+              </Button>
             </div>
           </Form>
         </Formik>

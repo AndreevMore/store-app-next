@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { Field, FieldArray, ErrorMessage as FormikError } from "formik";
+import { PlusCircle, Trash2 } from "lucide-react";
 
 export function OrderFormFields() {
   return (
@@ -48,25 +50,26 @@ export function OrderFormFields() {
                         className="text-red-500"
                       />
 
-                      <button
+                      <Button
                         type="button"
                         onClick={() => remove(index)}
-                        className="mt-2 cursor-pointer text-red-500"
+                        className="mt-2"
                       >
+                        <Trash2 className="text-red-500" size={20} />
                         Remove
-                      </button>
+                      </Button>
                     </div>
                   ),
                 )
               }
             </FieldArray>
-            <button
+            <Button
               type="button"
               onClick={() => push({ productId: "", quantity: "" })}
-              className="cursor-pointer text-blue-500"
             >
+              <PlusCircle className="text-green-500" size={20} />
               Add Product
-            </button>
+            </Button>
           </div>
         )}
       </FieldArray>

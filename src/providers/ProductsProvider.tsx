@@ -2,19 +2,18 @@
 import { createContext, useContext, ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "@/services/api.service";
-import { ProductCard } from "@/types/types"; // Убедитесь, что путь к типам правильный
+import { ProductCard } from "@/types/types";
 
 interface ProductsContextType {
-  products: { [key: number]: ProductCard }; // Объект с ключами, равными id
+  products: { [key: number]: ProductCard };
   error: unknown;
   isLoading: boolean;
 }
 
-// Создаем контекст с начальным значением null
 const ProductsContext = createContext<ProductsContextType | null>(null);
 
 interface ProductsProviderProps {
-  children: ReactNode; // Указываем, что children может быть любым React-элементом
+  children: ReactNode;
 }
 
 export const ProductsProvider = ({ children }: ProductsProviderProps) => {
@@ -28,7 +27,6 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
     staleTime: 60000,
   });
 
-  // Преобразуем массив продуктов в объект с ключами, равными id
   const productsObj = products.reduce(
     (acc, product) => {
       acc[product.id] = product;
