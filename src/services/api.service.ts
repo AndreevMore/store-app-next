@@ -1,6 +1,5 @@
 import { Order, ProductCard } from "@/types/types";
-
-const API_URL = "https://fakestoreapi.com";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const TIMEOUT = 10000; // 10 seconds
 
 const fetchWithTimeout = async (url: string, options?: RequestInit) => {
